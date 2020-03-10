@@ -8,7 +8,7 @@ namespace JudgeShape
     {        
         public Triangle(double x, double y,double z)
         {
-            if (x*y*z<0 || y + z < x || x + z < y || x + y < z)
+            if (x<=0||y<=0||z<=0 || y + z < x || x + z < y || x + y < z)
             {
                 Console.WriteLine("It's not a legal triangle!");
             }
@@ -17,10 +17,10 @@ namespace JudgeShape
                 this.a = x;
                 this.b = y;
                 this.c = z;
-                isRight = true;                               
+                base.isRight = true;                               
             }
         }
-        public override void CaculateArea()
+        public override void CalculateArea()
         {
             if (isRight)
             {

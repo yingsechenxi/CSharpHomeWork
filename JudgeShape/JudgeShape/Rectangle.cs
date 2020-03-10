@@ -8,7 +8,7 @@ namespace JudgeShape
     {
         public Rectangle(double x, double y)
         {
-            if (x*y < 0)
+            if (x<=0||y<=0||x==y)
             {
                 Console.WriteLine("It's not a legal rectangle!");
              }
@@ -16,10 +16,10 @@ namespace JudgeShape
             {
                 this.a = x;
                 this.b = y;
-                isRight = true;
+                base.isRight = true;
             }
         }
-        public override void CaculateArea()
+        public override void CalculateArea()
         {
             if(isRight)
             {

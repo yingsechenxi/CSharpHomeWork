@@ -8,17 +8,17 @@ namespace JudgeShape
     {
         public Square(double x)
         {
-            if (x < 0 )
+            if (x <=0 )
             {
                 Console.WriteLine("It's not a legal square!");
             }
             else
             {
                 this.a = x;
-                isRight = true;
+                base.isRight = true;
             }
         }
-        public override void CaculateArea()
+        public override void CalculateArea()
         {
             if(isRight)
             {

@@ -7,7 +7,7 @@ namespace JudgeShape
     public abstract class Shape
     {
         protected double a, b, c;
-        public abstract void CaculateArea();
-        public bool isRight = false;
+        public abstract void CalculateArea();
+        protected bool isRight = false;
     }
 }

@@ -35,10 +35,11 @@ namespace JudgeShape
             for(int i = 0; i < 10; i++)
             {
                 Random rd = new Random();
-                int x = rd.Next(3, 3);
+                int x = rd.Next(1, 4);
                 Shape shape = CreateShapeFactory.CreateShape(x);
-                shape.CaculateArea();
+                shape.CalculateArea();
             }
+            while (true) ;
         }
     }
 }
