@@ -45,8 +45,8 @@ namespace Timer
             for(int i=1;i<=10;i++)
             {
                 testClock.tickTock = i;
-                //testClock.clock1.Tick(i);
-                //testClock.clock1.Alarm(i);
+                testClock.clock1.Tick(i);
+                testClock.clock1.Alarm(i);
             }
         }
     }
