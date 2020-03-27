@@ -4,7 +4,7 @@ using System.Text;
 
 namespace orderwork
 {
-    class Order
+    public class Order
     {
         public int id;
         public string name;
@@ -17,6 +17,7 @@ namespace orderwork
             this.number = number;
             this.money = money;
         }
+        public Order() { }
         public override bool Equals(object obj)
         {
             Order test = obj as Order;

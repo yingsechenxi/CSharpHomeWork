@@ -12,10 +12,10 @@ namespace orderwork
             bool working = true;
             int id = 0,number = 0;
             double money = 0;
-            List<Order> orders = new List<Order>();
-            while(working)
+            //List<Order> orders = new List<Order>();
+            while (working)
             {
-                Console.WriteLine("请选择您希望使用的功能 1、添加订单 2、查询订单 3、删除订单 4、更改订单 5、显示现有订单 6、退出系统");
+                Console.WriteLine("请选择您希望使用的功能 1、添加订单 2、查询订单 3、删除订单 4、更改订单 5、显示现有订单 6、将订单存储至本地 7、读取本地订单 8、退出系统");
                 string choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -32,12 +32,13 @@ namespace orderwork
                         }
                         else
                         {
-                            if (int.TryParse(info[0], out id) && double.TryParse(info[1], out money) && int.TryParse(info[3],out number))
+                            if (int.TryParse(info[0], out id) && double.TryParse(info[2], out money) && int.TryParse(info[3],out number))
                             {
-                                service.AddOrder(id, money, info[2], number, orders);
+                                service.AddOrder(id, money, info[1], number, service.orders);
                             }
                             else
                             {
+                                string a = info[1];
                                 Console.WriteLine("存在非法输入！请重新确认订单信息！");
                             }                            
                         }
@@ -54,7 +55,7 @@ namespace orderwork
                                     string searchid = Console.ReadLine();
                                     if (int.TryParse(searchid, out id))
                                     {
-                                        service.SearchOrder(id, 0, "", 0, orders);
+                                        service.SearchOrder(id, 0, "", 0, service.orders);
                                     }
                                     break;
                                 case "2":
@@ -62,7 +63,7 @@ namespace orderwork
                                     string searchmoney = Console.ReadLine();
                                     if (double.TryParse(searchmoney, out money))
                                     {
-                                        service.SearchOrder(0, money, "", 0, orders);
+                                        service.SearchOrder(0, money, "", 0, service.orders);
                                     }
                                     break;
                                 case "3":
@@ -70,13 +71,13 @@ namespace orderwork
                                     string searchamount = Console.ReadLine();
                                     if (int.TryParse(searchamount, out number))
                                     {
-                                        service.SearchOrder(0, 0, "", number, orders);
+                                        service.SearchOrder(0, 0, "", number, service.orders);
                                     }
                                     break;
                                 case "4":
                                     Console.WriteLine("请输入商品名！");
                                     string searchname = Console.ReadLine();
-                                    service.SearchOrder(0, 0, searchname, 0, orders);
+                                    service.SearchOrder(0, 0, searchname, 0, service.orders);
                                     break;
                                 default:
                                     Console.WriteLine("选择条件非法！请重新操作");
@@ -92,7 +93,7 @@ namespace orderwork
                         string delid = Console.ReadLine();
                         if(int.TryParse(delid,out id))
                         {            
-                            service.DeleteOrder(id,orders);
+                            service.DeleteOrder(id, service.orders);
                         }
                         break;
                     case "4":
@@ -115,7 +116,7 @@ namespace orderwork
                             {
                                 if (int.TryParse(newinfo[0], out id) && double.TryParse(newinfo[1], out money) && int.TryParse(newinfo[3], out number))
                                 {
-                                    service.ChangeOrder(changeid1, orders,id, money, newinfo[2], number);
+                                    service.ChangeOrder(changeid1, service.orders, id, money, newinfo[2], number);
                                 }
                                 else
                                 {
@@ -126,12 +127,18 @@ namespace orderwork
                         }
                         break;
                     case "5":
-                        foreach (Order noworeder in orders)
+                        foreach (Order noworeder in service.orders)
                         {
                             Console.WriteLine(noworeder);
                         }
                         break;
                     case "6":
+                        service.Export();
+                        break;
+                    case "7":
+                        service.Import();
+                        break;
+                    case "8":
                         Console.WriteLine("确认退出吗？（输入1表示确认退出，0表示取消）");
                         string flag = Console.ReadLine();
                         if (flag == "1")

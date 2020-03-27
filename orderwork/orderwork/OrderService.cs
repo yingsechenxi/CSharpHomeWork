@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace orderwork
 {
-    class OrderService
+    [Serializable]
+    public class OrderService
     {
+        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Order>));
+        public List<Order> orders = new List<Order>();
         int flag = 0;
         public void AddOrder(int id, double money, string name, int number,  List<Order> orders)
         {
@@ -129,6 +134,26 @@ namespace orderwork
                 var target = from o in orders where o.number == number orderby o.money descending select o;
                 List<Order> result = target.ToList();
                 foreach (Order noworeder in result)
+                {
+                    Console.WriteLine(noworeder);
+                }
+            }
+        }
+        public void Export()
+        {            
+            using (FileStream fs = new FileStream("order.xml", FileMode.Create))
+            {
+                xmlSerializer.Serialize(fs, orders);
+            }
+            Console.WriteLine("保存成功！");
+        }
+        public void Import()
+        {
+            using(FileStream fs = new FileStream("order.xml", FileMode.Open))
+            {
+                List<Order> orders1 = (List<Order>)xmlSerializer.Deserialize(fs);
+                Console.WriteLine("本地订单内容如下:");
+                foreach (Order noworeder in orders1)
                 {
                     Console.WriteLine(noworeder);
                 }
