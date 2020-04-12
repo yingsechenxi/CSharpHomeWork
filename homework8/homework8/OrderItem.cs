@@ -6,12 +6,12 @@ namespace homework8
 {
     public class OrderItem
     {
-        public int id;       
-        public double money;
-        public string name;
-        public int number;
-        public string client;
-        public int clientID;
+        public int id { get; set; }       
+        public double money { get; set; }
+        public string name { get; set; }
+        public int number{ get; set; }
+    public string client { get; set; }
+        public int clientID { get; set; }
         public OrderItem(int id, double money, string name, int number,string client,int clientID)
         {
             this.id = id;
